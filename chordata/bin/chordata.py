@@ -95,9 +95,11 @@ Available operations:
 """
 
 ERR_MISSING_APP_NAME = "You need to pass a name for your new Chordata App."
+
+
 if __name__ == "__main__":
     arguments = sys.argv[1:]
-    if len(arguments) == 0 or arguments[0] == "html":
+    if len(arguments) == 0 or arguments[0] == "help":
         print(HELP)
     elif arguments[0] == "init":
         create_project()
