@@ -14,7 +14,7 @@ exclude = [
 name = "chordata"
 version = "0.1.0"
 authors = [
-  { name="James Hickman", email="james@jameshickman.net" },
+  { name="James Hickman", email="james@rationalboxes.com" },
 ]
 description = "Next generation Python web server framework"
 readme = "README.md"

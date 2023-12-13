@@ -4,7 +4,7 @@ setup(
     name='chordata',
     version="0.1.0",
     author="James Hickman",
-    author_email="james@jameshickman.net",
+    author_email="james@rationalboxes.com",
     description="Next generation Python web server framework",
     packages=[
         "chordata",
