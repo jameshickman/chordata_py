@@ -17,7 +17,7 @@ def create_project():
     os.mkdir(app_dir)
     init_filename = os.path.join(app_dir, "__init__.py")
     with open(init_filename, "w") as f:
-        f.write("# Chordata Apps package")
+        f.write("# Chordata Apps package\n")
     static_dir = os.path.join(wd, "static")
     os.mkdir(static_dir)
     static_global_dir = os.path.join(static_dir, "_global")
