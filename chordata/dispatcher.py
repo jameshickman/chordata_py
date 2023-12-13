@@ -132,9 +132,9 @@ class Dispatcher:
         return url
 
     def _setup_check(self, database):
-        setup_package = "apps." + str(self.application) + ".setup"
+        setup_package = "apps." + str(self.application) + ".db_setup"
         try:
-            setup = __import__(setup_package, fromlist=['schema', 'db_setup'])
+            setup = __import__(setup_package, fromlist=['schema', 'setup'])
             fn_schema_name = getattr(setup, "schema")
             fn_setup = getattr(setup, "setup")
             schema = fn_schema_name()
