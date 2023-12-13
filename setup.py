@@ -6,7 +6,14 @@ setup(
     author="James Hickman",
     author_email="james@jameshickman.net",
     description="Next generation Python web server framework",
-    packages=find_packages("chordata"),
+    packages=[
+        "chordata",
+        "chordata.bin",
+        "chordata.implementations",
+        "chordata.interfaces",
+        "chordata.ldap",
+        "chordata.util"
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: LGPL 2.1",

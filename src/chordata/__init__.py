@@ -1,1 +1,0 @@
-# Chordata core package
