@@ -17,7 +17,6 @@ class ControllerBase:
     def __init__(self, session: dict, configuration: dict, models: list):
         self.session = session
         self.configuration = configuration
-        self.models = {}
         for model in models:
             class_name = str(type(model).__name__)
             setattr(self, class_name.lower(), model)
