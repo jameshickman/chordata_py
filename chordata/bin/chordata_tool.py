@@ -93,7 +93,7 @@ def index(e: ServerEnvironment, s: dict):
 HELP = """
 Available operations:
     init - create default Chordata directory structure for Apps and default static files.
-    create <app_name> - Create a new Chordata App structure in the local App Directory.
+    create <app_name> - Create a new Chordata App structure in the local Apps Directory.
 """
 
 ERR_MISSING_APP_NAME = "You need to pass a name for your new Chordata App."
