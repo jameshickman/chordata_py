@@ -106,7 +106,7 @@ if __name__ == "__main__":
     elif arguments[0] == "init":
         create_project()
     elif arguments[0] == "create":
-        if len(arguments) > 2:
+        if len(arguments) < 2:
             print(ERR_MISSING_APP_NAME)
         else:
             create_app(arguments[1])
