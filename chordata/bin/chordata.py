@@ -38,7 +38,7 @@ def create_app(app_name: str):
     os.mkdir(app_static_dir)
     os.mkdir(app_template_dir)
     with open(app_init, "w") as f:
-        f.write("Chordata App: " + str(app_name))
+        f.write("# Chordata App: " + str(app_name) + "\n")
     with open(app_template_file, "w") as f:
         f.write(BOILERPLATE_TEMPLATE)
     with open(app_routes_file, "w") as f:
