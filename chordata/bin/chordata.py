@@ -22,7 +22,7 @@ def create_project():
     os.mkdir(static_dir)
     static_global_dir = os.path.join(static_dir, "_global")
     os.mkdir(static_global_dir)
-    print("Default Chordata Apps package and static files directory created.")
+    print("Default Chordata Apps package and static files directory created.\n")
     return
 
 
