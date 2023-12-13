@@ -2,7 +2,7 @@ import os
 import json
 from chordata.posts import POSTdata
 from chordata.events import EventManager
-from chordata.server_env import ServerEnvironment
+from src.chordata.server_env import ServerEnvironment
 from chordata.stderror import e_print
 
 

@@ -8,6 +8,9 @@ import sys
 
 wd = os.getcwd()
 sys.path.append(wd)
+dev_src = os.path.join(wd, "src")
+if os.path.exists(dev_src):
+    sys.path.append(dev_src)
 
 
 from chordata.configuration import env_loader
@@ -52,9 +55,9 @@ if class_map is not False:
     injection_manager.load_json(class_map)
 
 # Dynamic mapped packages
-Database = injection_manager.get('fw_lib.implementations.database', 'Database')
-SessionManager = injection_manager.get('fw_lib.implementations.session', 'SessionManager')
-ResolveTenant = injection_manager.get('fw_lib.implementations.resolver', 'ResolveTenant')
+Database = injection_manager.get('chordata.implementations.database', 'Database')
+SessionManager = injection_manager.get('chordata.implementations.session', 'SessionManager')
+ResolveTenant = injection_manager.get('chordata.implementations.resolver', 'ResolveTenant')
 
 # Find all the Application Routes
 routes = build_route_map(wd)
