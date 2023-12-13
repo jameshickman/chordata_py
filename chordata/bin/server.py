@@ -5,6 +5,11 @@
 import os
 import sys
 
+
+wd = os.getcwd()
+sys.path.append(wd)
+
+
 from chordata.configuration import env_loader
 from chordata.injector import PackageMapper
 from chordata.render import Render
@@ -15,10 +20,8 @@ from chordata.cookies import get_cookies, build_cookie_header
 from chordata.stderror import e_print
 from chordata.output_stream import CHUNK_SIZE, file_buffer
 
-SESSION_COOKIE = "FWSESSION"
+SESSION_COOKIE = "CHORDATASESSION"
 
-wd = os.getcwd()
-sys.path.append(wd)
 
 configuration_keys = [
     'default_route',
