@@ -7,6 +7,7 @@ Chordata command line project creation tool
 
 import os
 import sys
+from string import Template
 
 
 wd = os.getcwd()
@@ -43,8 +44,9 @@ def create_app(app_name: str):
         f.write(BOILERPLATE_TEMPLATE)
     with open(app_routes_file, "w") as f:
         f.write(BOILERPLATE_ROUTES)
+    main_py_text = Template(BOILERPLATE_MAIN_PY).substitute(app_name=app_name)
     with open(app_main_file, "w") as f:
-        f.write(BOILERPLATE_MAIN_PY.format(app_name=app_name))
+        f.write(main_py_text)
     print("Successfully created App named: " + str(app_name) + ".")
     return
 
@@ -81,7 +83,7 @@ BOILERPLATE_MAIN_PY = """from chordata.server_env import ServerEnvironment
 
 def index(e: ServerEnvironment, s: dict):
     rv = {
-        "app_name": "{app_name}" 
+        "app_name": "${app_name}" 
     }
     return rv, {'template': 'index.html', 'type': 'text/html'}
 
