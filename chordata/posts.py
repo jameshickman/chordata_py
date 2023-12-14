@@ -42,7 +42,7 @@ class POSTdata:
                     fi['value'] = fs[field]
                 elif field_item.filename:
                     fi['upload'] = True
-                    fi['content'] = field_item.file.read()
+                    fi['content'] = field_item.file
                     fi['name'] = field_item.filename
                 else:
                     fi['upload'] = False
