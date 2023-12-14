@@ -2,6 +2,10 @@ import cgi
 import json
 
 
+class JSONInvalidException(Exception):
+    pass
+
+
 class POSTdata:
     def __init__(self, environ):
         """
@@ -70,5 +74,5 @@ class POSTdata:
         try:
             payload = json.loads(body)
         except Exception as e:
-            return False
+            raise JSONInvalidException(str(e))
         return payload
