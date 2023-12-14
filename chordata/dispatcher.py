@@ -117,7 +117,7 @@ class Dispatcher:
         params.set_verb(self.verb)
         if self.pd.isPost():
             params.set_data_type('POST')
-            params.set_post_data(self.pd)
+            params.set_post_data(self.pd.getValues())
         if self.pd.isJSON():
             params.set_data_type('JSON')
             params.set_json_data(self.pd.getJSON())

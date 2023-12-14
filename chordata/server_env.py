@@ -76,13 +76,13 @@ class ServerEnvironment:
     def get_data_type(self) -> str:
         return self.data_type
 
-    def get_data(self) -> (dict, POSTdata):
+    def get_data(self) -> dict:
         return self.data
 
     def set_data_type(self, t: str):
         self.data_type = t
 
-    def set_post_data(self, pd: POSTdata):
+    def set_post_data(self, pd: dict):
         self.data = pd
 
     def set_json_data(self, d: dict):
