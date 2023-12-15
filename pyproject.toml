@@ -39,5 +39,5 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 [project.scripts]
-chordata_server = "chordata.bin.chordata_server:main"
-chordata_tool = "chordata.bin.chordata_tool:main"
+chordate_server = "chordate.bin.chordate_server:main"
+chordate_tool = "chordate.bin.chordate_tool:main"
