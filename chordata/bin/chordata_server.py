@@ -173,6 +173,7 @@ def main():
     if len(sys.argv) > 1 and int(sys.argv[1]) > 0:
         port = int(sys.argv[1])
     from wsgiref.simple_server import make_server
+    print("Starting Chordata server on port: " + str(port))
     srv = make_server('localhost', port, handler)
     srv.serve_forever()
 
