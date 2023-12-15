@@ -1,7 +1,7 @@
 import os
 import json
-from chordata.interfaces.database import BaseDatabase
-from chordata.stderror import e_print
+from chordate.interfaces.database import BaseDatabase
+from chordate.stderror import e_print
 
 
 class EventParams:

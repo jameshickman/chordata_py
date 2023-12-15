@@ -1,7 +1,7 @@
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
 
-from chordata.interfaces.database import BaseDatabase
+from chordate.interfaces.database import BaseDatabase
 """
 Default implementation using SQLAlchamy and Postgres
 """

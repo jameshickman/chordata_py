@@ -1,7 +1,7 @@
-from chordata.interfaces.database import BaseDatabase
-from chordata.injector import PackageMapper
-from chordata.events import EventManager
-from chordata.posts import POSTdata
+from chordate.interfaces.database import BaseDatabase
+from chordate.injector import PackageMapper
+from chordate.events import EventManager
+from chordate.posts import POSTdata
 
 
 class ServerEnvironment:

@@ -9,7 +9,7 @@ Extend with application specific operation methods.
 """
 
 
-from chordata.interfaces.database import BaseDatabase
+from chordate.interfaces.database import BaseDatabase
 
 
 class ModelBase:

@@ -1,5 +1,5 @@
 import json
-from chordata.tagbuilder import TagBuilder
+from chordate.tagbuilder import TagBuilder
 
 
 def boot_webbus_components(components: list, page_vars: [dict, None] = None) -> TagBuilder:

@@ -1,5 +1,5 @@
-from chordata.tagbuilder import TagBuilder
-from chordata.util.translation import Translate
+from chordate.tagbuilder import TagBuilder
+from chordate.util.translation import Translate
 
 
 def form_builder(fields: list, translator: Translate):

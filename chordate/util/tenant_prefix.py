@@ -1,4 +1,4 @@
-from chordata.server_env import ServerEnvironment
+from chordate.server_env import ServerEnvironment
 
 
 def tenant_prefix(e: ServerEnvironment) -> str:

@@ -1,4 +1,4 @@
-from chordata.tagbuilder import TagBuilder
+from chordate.tagbuilder import TagBuilder
 
 
 def build_head_tag(

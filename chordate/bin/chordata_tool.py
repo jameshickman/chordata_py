@@ -78,7 +78,7 @@ BOILERPLATE_TEMPLATE = """<!DOCTYPE html>
 """
 
 
-BOILERPLATE_MAIN_PY = """from chordata.server_env import ServerEnvironment
+BOILERPLATE_MAIN_PY = """from chordate.server_env import ServerEnvironment
 
 
 def index(e: ServerEnvironment, s: dict):
@@ -92,8 +92,8 @@ def index(e: ServerEnvironment, s: dict):
 
 HELP = """
 Available operations:
-    init - create default Chordata directory structure for Apps and default static files.
-    create <app_name> - Create a new Chordata App structure in the local Apps Directory.
+    init - create default Chordate directory structure for Apps and default static files.
+    create <app_name> - Create a new Chordate App structure in the local Apps Directory.
 """
 
 ERR_MISSING_APP_NAME = "You need to pass a name for your new Chordata App."
