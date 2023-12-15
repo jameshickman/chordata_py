@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='chordata',
+    name='chordata_web',
     version="0.1.0",
     author="James Hickman",
     author_email="james@rationalboxes.com",
@@ -16,7 +16,7 @@ setup(
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)",
+        "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.10',

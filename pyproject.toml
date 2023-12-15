@@ -11,7 +11,7 @@ exclude = [
 ]
 
 [project]
-name = "chordata"
+name = "chordata_web"
 version = "0.1.0"
 authors = [
   { name="James Hickman", email="james@rationalboxes.com" },
@@ -35,6 +35,6 @@ dependencies = [
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
     "Operating System :: OS Independent",
 ]
