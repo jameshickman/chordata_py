@@ -8,7 +8,6 @@ setup(
     description="Next generation Python web server framework",
     packages=[
         "chordata",
-        "chordata.bin",
         "chordata.implementations",
         "chordata.interfaces",
         "chordata.ldap",
@@ -20,5 +19,5 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.10',
-    scripts=['chordata/bin/chordata_server.py', 'chordata/bin/chordata_tool.py']
+    scripts=['bin/chordata_server.py', 'bin/chordata_tool.py']
 )
