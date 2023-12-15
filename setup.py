@@ -21,8 +21,8 @@ setup(
     python_requires='>=3.10',
     entry_points={
         'console_scripts': [
-            'chordata_server=chordate.bin.chordata_server:main',
-            'chordata_tool=chordate.bin.chordata_tool:main'
+            'chordata_server=chordate.bin.chordate_server:main',
+            'chordata_tool=chordate.bin.chordate_tool:main'
         ]
     }
 )
