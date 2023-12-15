@@ -168,9 +168,14 @@ def handler(environ, start_response):
         return [output]
 
 
-if len(sys.argv) > 0 and sys.argv[1]:
-    port = int(sys.argv[1])
-    if __name__ == '__main__' and port:
-        from wsgiref.simple_server import make_server
-        srv = make_server('localhost', port, handler)
-        srv.serve_forever()
+def main():
+    port = 5000
+    if len(sys.argv) > 1 and int(sys.argv[1]) > 0:
+        port = int(sys.argv[1])
+    from wsgiref.simple_server import make_server
+    srv = make_server('localhost', port, handler)
+    srv.serve_forever()
+
+
+if __name__ == "__main__":
+    main()
