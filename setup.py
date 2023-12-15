@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='chordata_web',
+    name='chordata',
     version="0.1.0",
     author="James Hickman",
     author_email="james@rationalboxes.com",

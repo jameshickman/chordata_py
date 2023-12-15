@@ -11,7 +11,7 @@ exclude = [
 ]
 
 [project]
-name = "chordata_web"
+name = "chordata"
 version = "0.1.0"
 authors = [
   { name="James Hickman", email="james@rationalboxes.com" },
