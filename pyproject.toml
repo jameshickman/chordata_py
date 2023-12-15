@@ -38,3 +38,6 @@ classifiers = [
     "License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)",
     "Operating System :: OS Independent",
 ]
+[project.scripts]
+chordata_server = "chordata.bin.chordata_server:handler"
+chordata_tool = "chordata.bin.chordata_tool:main"

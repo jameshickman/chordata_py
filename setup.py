@@ -19,5 +19,10 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.10',
-    scripts=['bin/chordata_server.py', 'bin/chordata_tool.py']
+    entry_points={
+        'console_scripts': [
+            'chordata_server=chordata.bin.chordata_server:handler',
+            'chordata_tool=chordata.bin.chordata_tool:main'
+        ]
+    }
 )
