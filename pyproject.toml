@@ -41,3 +41,4 @@ classifiers = [
 [project.scripts]
 chordate_server = "chordate.bin.chordate_server:main"
 chordate_tool = "chordate.bin.chordate_tool:main"
+chordate_interval = "chordate.bin.chordate_interval:main"

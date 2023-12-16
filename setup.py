@@ -22,7 +22,8 @@ setup(
     entry_points={
         'console_scripts': [
             'chordate_server=chordate.bin.chordate_server:main',
-            'chordate_tool=chordate.bin.chordate_tool:main'
+            'chordate_tool=chordate.bin.chordate_tool:main',
+            'chordate_chron=chordate.bin.chordate_chron:main'
         ]
     }
 )
