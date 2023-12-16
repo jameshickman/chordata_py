@@ -74,7 +74,7 @@ def handler(environ, start_response):
     if static_file is not False:
         return serve_static(environ, start_response, static_file)
 
-    if request_path == '/' and 'default_route' in configuration and len(configuration.get('default_route')) > 0:
+    if request_path == '/' and 'default_route' in configuration and len(configuration.get('default_route', [])) > 0:
         start_response("307 Temporary Redirect", [('Location', configuration.get('default_route'))])
         return ["Redirecting to Default".encode()]
 
