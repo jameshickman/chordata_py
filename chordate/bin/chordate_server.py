@@ -41,6 +41,7 @@ configuration_keys = [
     'login',
     'forward_to_var',
     'compile_cache',
+    'tenant_database',
     'language_db'
 ]
 configuration = env_loader(configuration_keys)
