@@ -6,11 +6,45 @@ Chordate Chron task manager
 import os
 import sys
 import time
+import threading
 from chordate.configuration import env_loader
 from chordate.interval import find_chron_configurations, ChronParams
 from chordate.tenants import get_tenants
 from chordate.injector import PackageMapper
 from chordate.stderror import e_print
+
+
+class RunHandler(threading.Thread):
+    def __init__(self,
+                 database: "Database",
+                 app_dir: str,
+                 package: str,
+                 function: str,
+                 tenant: str,
+                 configuration: dict,
+                 now: float):
+        threading.Thread.__init__(self)
+        self.database = database
+        self.app_dir = app_dir
+        self.package = package
+        self.function = function
+        self.tenant = tenant
+        self.configuration = configuration
+        self.now = now
+        pass
+
+    def run(self):
+        pkg = __import__(self.package, fromlist=[self.function])
+        getattr(pkg, self.function)(
+            ChronParams(
+                self.database,
+                self.tenant,
+                self.app_dir,
+                self.configuration,
+                self.now
+            )
+        )
+        return
 
 
 def main():
@@ -58,8 +92,7 @@ def main():
                     package = "apps." + chron['app'] + "." + chron['package']
                     function = chron['function']
                     try:
-                        pkg = __import__(package, fromlist=[function])
-                        getattr(pkg, function)(ChronParams(dbc, tenant, app_dir, configuration, now))
+                        RunHandler(dbc, app_dir, package, function, tenant, configuration, now).run()
                     except Exception as e:
                         e_print(str(e))
         time.sleep(1)
