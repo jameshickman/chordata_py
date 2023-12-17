@@ -92,7 +92,7 @@ def main():
                     package = "apps." + chron['app'] + "." + chron['package']
                     function = chron['function']
                     try:
-                        RunHandler(dbc, app_dir, package, function, tenant, configuration, now).run()
+                        RunHandler(dbc, app_dir, package, function, tenant, configuration, now).start()
                     except Exception as e:
                         e_print(str(e))
         time.sleep(1)
