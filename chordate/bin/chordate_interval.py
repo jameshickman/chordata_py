@@ -17,7 +17,7 @@ from chordate.stderror import e_print
 
 class RunHandler(threading.Thread):
     def __init__(self,
-                 database: "Database",
+                 Database,
                  app_dir: str,
                  package: str,
                  function: str,
@@ -25,7 +25,7 @@ class RunHandler(threading.Thread):
                  configuration: dict,
                  now: float):
         threading.Thread.__init__(self)
-        self.database = database
+        self.dbc = Database(tenant, configuration)
         self.app_dir = app_dir
         self.package = package
         self.function = function
@@ -38,7 +38,7 @@ class RunHandler(threading.Thread):
         pkg = __import__(self.package, fromlist=[self.function])
         getattr(pkg, self.function)(
             ChronParams(
-                self.database,
+                self.dbc,
                 self.tenant,
                 self.app_dir,
                 self.configuration,
@@ -86,7 +86,6 @@ def main():
     while True:
         now = time.time()
         for tenant in tenants:
-            dbc = Database(tenant, configuration)
             for chron in jobs:
                 if chron['next'] <= now:
                     app_dir = os.path.join(wd, "apps", chron['app'])
@@ -94,7 +93,7 @@ def main():
                     package = "apps." + chron['app'] + "." + chron['package']
                     function = chron['function']
                     try:
-                        RunHandler(dbc, app_dir, package, function, tenant, configuration, now).start()
+                        RunHandler(Database, app_dir, package, function, tenant, configuration, now).start()
                     except Exception as e:
                         e_print(str(e))
         time.sleep(1)
