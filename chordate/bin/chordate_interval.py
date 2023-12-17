@@ -7,6 +7,7 @@ import os
 import sys
 import time
 import threading
+import random
 from chordate.configuration import env_loader
 from chordate.interval import find_chron_configurations, ChronParams
 from chordate.tenants import get_tenants
@@ -78,9 +79,10 @@ def main():
     )
     jobs = find_chron_configurations(wd)
     tenants = get_tenants(configuration)
+    now = time.time()
     for i in range(0, len(jobs)):
         if "next" not in jobs[i].keys():
-            jobs[i]['next'] = 0
+            jobs[i]['next'] = now + float(random.randint(0, 20))
     while True:
         now = time.time()
         for tenant in tenants:
