@@ -21,5 +21,5 @@ class BaseDatabase:
         pass
 
     @staticmethod
-    def get_orm_type(self):
+    def get_orm_type():
         return "UNKNOWN"
