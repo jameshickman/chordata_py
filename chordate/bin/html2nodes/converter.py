@@ -15,7 +15,7 @@ def html_to_tag_builder(html_string: str, starting_node: str = None) -> str:
             code_children = []
             for child in node:
                 code_children.append(parse(child))
-            code += ".add_children([\n" + ",\n ".join(code_children) + "])"
+            code += ".add_child([\n" + ",\n ".join(code_children) + "])"
         return code
 
     root = ET.fromstring(html_string)
