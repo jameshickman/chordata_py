@@ -58,7 +58,11 @@ def html2code(html_file: str, start_node: str = None):
     html = ""
     with open(html_file, "r") as f:
         html = f.read()
-    print(html_to_tag_builder(html, start_node))
+    code = html_to_tag_builder(html, start_node)
+    if code is False:
+        print(ERR_INVALID_SEARCH)
+    else:
+        print(code)
     return
 
 
@@ -116,6 +120,8 @@ ERR_MISSING_HTML_FILE = "You need to specify an HTML file."
 
 ERR_MISSING_FILE = "Cannot find the file!"
 
+ERR_INVALID_SEARCH = "The XPath search passed did match any tag in the HTML file."
+
 
 def main():
     arguments = sys.argv[1:]
@@ -133,7 +139,7 @@ def main():
             print(ERR_MISSING_HTML_FILE)
         else:
             if len(arguments) == 3:
-                html2code(arguments[1], arguments[3])
+                html2code(arguments[1], arguments[2])
             else:
                 html2code(arguments[1])
 

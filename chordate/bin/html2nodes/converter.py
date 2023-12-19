@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 
-def html_to_tag_builder(html_string: str, starting_node: str = None) -> str:
+def html_to_tag_builder(html_string: str, starting_node: str = None) -> (str, bool):
     def parse(node: ET) -> str:
         code = "TagBuilder("
         if node.tag.lower() != 'div':
@@ -25,5 +25,7 @@ def html_to_tag_builder(html_string: str, starting_node: str = None) -> str:
     root = ET.fromstring(html_string)
     if starting_node is not None:
         root = root.find(starting_node)
+        if root is None:
+            return False
     return parse(root)
 
