@@ -120,7 +120,7 @@ ERR_MISSING_HTML_FILE = "You need to specify an HTML file."
 
 ERR_MISSING_FILE = "Cannot find the file!"
 
-ERR_INVALID_SEARCH = "The XPath search passed did match any tag in the HTML file."
+ERR_INVALID_SEARCH = "The XPath search did match any tag in the HTML file."
 
 
 def main():
