@@ -10,7 +10,7 @@ def html_to_tag_builder(html_string: str, starting_node: str = None) -> str:
         if len(node.attrib.keys()) > 0:
             code += ".add_attributes(" + str(node.attrib) + ")"
         if node.text and len(node.text.strip()) > 0:
-            code += ".add_text(t.t(\"" + node.text.strip() + "\"))"
+            code += ".set_text(t.t(\"" + node.text.strip() + "\"))"
         if len(node) > 0:
             code_children = []
             for child in node:
