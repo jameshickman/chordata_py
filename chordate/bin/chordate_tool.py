@@ -51,6 +51,17 @@ def create_app(app_name: str):
     return
 
 
+def html2code(html_file: str, start_node: str = None):
+    if not os.path.exists(html_file):
+        print(ERR_MISSING_FILE)
+    from chordate.bin.html2nodes.converter import html_to_tag_builder
+    html = ""
+    with open(html_file, "r") as f:
+        html = f.read()
+    print(html_to_tag_builder(html, start_node))
+    return
+
+
 BOILERPLATE_ROUTES = """{
     "index": {
         "package": "main",
@@ -94,9 +105,16 @@ HELP = """
 Available operations:
     init - create default Chordate directory structure for Apps and default static files.
     create <app_name> - Create a new Chordate App structure in the local Apps Directory.
+    html2code <html_file> <base_node: optional> - Convert an HTML file to equivalent Python code using TagBuilder
+                                                  Code is written to stdout, so pipe into a file. The optional
+                                                  third parameter can be an Xpath to the tag to start conversion at.
 """
 
 ERR_MISSING_APP_NAME = "You need to pass a name for your new Chordata App."
+
+ERR_MISSING_HTML_FILE = "You need to specify an HTML file."
+
+ERR_MISSING_FILE = "Cannot find the file!"
 
 
 def main():
@@ -110,6 +128,14 @@ def main():
             print(ERR_MISSING_APP_NAME)
         else:
             create_app(arguments[1])
+    elif arguments[0] == "html2code":
+        if len(arguments) < 2:
+            print(ERR_MISSING_HTML_FILE)
+        else:
+            if len(arguments) == 3:
+                html2code(arguments[1], arguments[3])
+            else:
+                html2code(arguments[1])
 
 
 if __name__ == "__main__":

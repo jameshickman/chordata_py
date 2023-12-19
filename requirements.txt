@@ -9,3 +9,4 @@ SQLAlchemy==2.0.23
 munch~=2.5.0
 Jinja2~=3.0.3
 ldap3~=2.5.2
+black~=23.12.0
