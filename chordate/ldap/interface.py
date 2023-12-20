@@ -48,7 +48,16 @@ class DirectoryServices:
             return False
         return True
 
+    def activate_connection(self):
+        if self.connection is None:
+            self.connect(
+                self.config.get('ldap_bind_user'),
+                self.config.get('ldap_bind_password')
+            )
+        return
+
     def list_tenants(self):
+        self.activate_connection()
         tenants = []
         tenants_base = Template(LDAPtemplates.tenants_base).substitute(
             {
@@ -72,6 +81,7 @@ class DirectoryServices:
         return tenants
 
     def get_groups(self, tenant: str, user: str) -> list:
+        self.activate_connection()
         roles = []
         tenant_base = Template(LDAPtemplates.tenant_path).substitute(
             {
@@ -102,6 +112,7 @@ class DirectoryServices:
         return roles
 
     def get_user_data(self, user: str) -> dict:
+        self.activate_connection()
         search_term = Template(LDAPtemplates.user_search).substitute({'user': user})
         self.connection.search(
             search_base=self.ldap_base,
@@ -114,6 +125,7 @@ class DirectoryServices:
         return {}
 
     def update_user_fields(self, user: str, updates: dict):
+        self.activate_connection()
         user_dn = Template(LDAPtemplates.user_dn).substitute(
             {
                 "domain": self.config.get("ldap_domain"),
@@ -127,6 +139,7 @@ class DirectoryServices:
         return self.connection.modify(user_dn, u)
 
     def update_password(self, user: str, password: str):
+        self.activate_connection()
         user_dn = Template(LDAPtemplates.user_dn).substitute(
             {
                 "domain": self.config.get("ldap_domain"),
@@ -141,6 +154,7 @@ class DirectoryServices:
         return self.connection.modify(user_dn, changes)
 
     def user_exists(self, user: str) -> bool:
+        self.activate_connection()
         search_term = Template(LDAPtemplates.user_search).substitute({'user': user})
         self.connection.search(self.ldap_base, search_term)
         if len(self.connection.entries) > 0 and self.connection.entries[0]:
@@ -148,6 +162,7 @@ class DirectoryServices:
         return False
 
     def get_users_in(self, tenant: str, group: str) -> dict:
+        self.activate_connection()
         tenant_base = Template(LDAPtemplates.tenant_path).substitute(
             {
                 "domain": self.config.get("ldap_domain"),
@@ -168,6 +183,7 @@ class DirectoryServices:
         return self.connection.entries[0].entry_attributes_as_dict['member']
 
     def add_user_to(self, tenant: str, user: str, group: str) -> bool:
+        self.activate_connection()
         user_dn = Template(LDAPtemplates.user_dn).substitute(
             {
                 "domain": self.config.get("ldap_domain"),
@@ -194,6 +210,7 @@ class DirectoryServices:
                     organization: str = '',
                     password: str = None,
                     phone: str = None) -> str:
+        self.activate_connection()
         if password is None:
             password = hashed(HASHED_SALTED_SHA, str(uuid.uuid4()))
         user_dn = Template(LDAPtemplates.user_dn).substitute(
@@ -217,6 +234,7 @@ class DirectoryServices:
         return user_dn
 
     def tenant_exists(self, tenant_name: str) -> bool:
+        self.activate_connection()
         search_term = Template(LDAPtemplates.tenant_group).substitute({'tenant': tenant_name})
         tenant_base = Template(LDAPtemplates.tenants_base).substitute(
             {
