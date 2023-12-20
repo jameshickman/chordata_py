@@ -1,5 +1,5 @@
 class TagBuilder:
-    def __init__(self, tag: str = 'DIV'):
+    def __init__(self, tag: str = 'div'):
         self.d = {
             'tag': tag
         }
