@@ -11,7 +11,7 @@ def html_to_tag_builder(html_string: str, starting_node: str = None) -> (str, bo
             code += ".add_attributes(" + str(node.attrib) + ")"
         if node.text and len(node.text.strip()) > 0:
             s = node.text.strip()
-            if s[0] == "$":
+            if s[0] == "$" or s[0] == "{":
                 code += ".set_text(\"" + s + "\")"
             else:
                 code += ".set_text(t.t(\"" + node.text.strip() + "\"))"
