@@ -8,11 +8,11 @@ import sys
 import time
 import threading
 import random
-from chordate.configuration import env_loader
-from chordate.interval import find_chron_configurations, ChronParams
-from chordate.tenants import get_tenants
-from chordate.injector import PackageMapper
-from chordate.stderror import e_print
+from chordataweb.configuration import env_loader
+from chordataweb.interval import find_chron_configurations, ChronParams
+from chordataweb.tenants import get_tenants
+from chordataweb.injector import PackageMapper
+from chordataweb.stderror import e_print
 
 
 class RunHandler(threading.Thread):
@@ -53,7 +53,7 @@ def main():
     class_map = os.getenv('CHOR_INJECTION_MAP', False)
     if class_map is not False:
         injection_manager.load_json(class_map)
-    Database = injection_manager.get('chordate.implementations.database', 'Database')
+    Database = injection_manager.get('chordataweb.implementations.database', 'Database')
     wd = os.getcwd()
     sys.path.append(wd)
     configuration = env_loader(

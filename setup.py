@@ -1,17 +1,17 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='chordate',
+    name='chordataweb',
     version="0.1.0",
     author="James Hickman",
     author_email="james@rationalboxes.com",
     description="Next generation Python web server framework",
     packages=[
-        "chordate",
-        "chordate.implementations",
-        "chordate.interfaces",
-        "chordate.ldap",
-        "chordate.util"
+        "chordataweb",
+        "chordataweb.implementations",
+        "chordataweb.interfaces",
+        "chordataweb.ldap",
+        "chordataweb.util"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -21,9 +21,9 @@ setup(
     python_requires='>=3.10',
     entry_points={
         'console_scripts': [
-            'chordate_server=chordate.bin.chordate_server:main',
-            'chordate_tool=chordate.bin.chordate_tool:main',
-            'chordate_chron=chordate.bin.chordate_chron:main'
+            'chordate_server=chordataweb.bin.chordate_server:main',
+            'chordate_tool=chordataweb.bin.chordate_tool:main',
+            'chordate_chron=chordataweb.bin.chordate_chron:main'
         ]
     }
 )

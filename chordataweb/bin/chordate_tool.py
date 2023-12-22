@@ -54,7 +54,7 @@ def create_app(app_name: str):
 def html2code(html_file: str, start_node: str = None):
     if not os.path.exists(html_file):
         print(ERR_MISSING_FILE)
-    from chordate.bin.html2nodes.converter import html_to_tag_builder
+    from chordataweb.bin.html2nodes.converter import html_to_tag_builder
     html = ""
     with open(html_file, "r") as f:
         html = f.read()
@@ -93,7 +93,7 @@ BOILERPLATE_TEMPLATE = """<!DOCTYPE html>
 """
 
 
-BOILERPLATE_MAIN_PY = """from chordate.server_env import ServerEnvironment
+BOILERPLATE_MAIN_PY = """from chordataweb.server_env import ServerEnvironment
 
 
 def index(e: ServerEnvironment, s: dict):

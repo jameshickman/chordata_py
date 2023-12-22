@@ -1,5 +1,5 @@
 import sqlite3
-from chordate.ldap.interface import DirectoryServices
+from chordataweb.ldap.interface import DirectoryServices
 
 """
 Get the list of Tenants for the tenants.db or LDAP services

@@ -10,15 +10,15 @@ wd = os.getcwd()
 sys.path.append(wd)
 
 
-from chordate.configuration import env_loader
-from chordate.injector import PackageMapper
-from chordate.render import Render
-from chordate.static import static_file_exists, serve_static
-from chordate.dispatcher import Dispatcher, RouteNotFound, build_route_map
-from chordate.events import find_watchers
-from chordate.cookies import get_cookies, build_cookie_header
-from chordate.stderror import e_print
-from chordate.output_stream import CHUNK_SIZE, file_buffer
+from chordataweb.configuration import env_loader
+from chordataweb.injector import PackageMapper
+from chordataweb.render import Render
+from chordataweb.static import static_file_exists, serve_static
+from chordataweb.dispatcher import Dispatcher, RouteNotFound, build_route_map
+from chordataweb.events import find_watchers
+from chordataweb.cookies import get_cookies, build_cookie_header
+from chordataweb.stderror import e_print
+from chordataweb.output_stream import CHUNK_SIZE, file_buffer
 
 SESSION_COOKIE = "CHORDATASESSION"
 
@@ -53,9 +53,9 @@ if class_map is not False:
     injection_manager.load_json(class_map)
 
 # Dynamic mapped packages
-Database = injection_manager.get('chordate.implementations.database', 'Database')
-SessionManager = injection_manager.get('chordate.implementations.session', 'SessionManager')
-ResolveTenant = injection_manager.get('chordate.implementations.resolver', 'ResolveTenant')
+Database = injection_manager.get('chordataweb.implementations.database', 'Database')
+SessionManager = injection_manager.get('chordataweb.implementations.session', 'SessionManager')
+ResolveTenant = injection_manager.get('chordataweb.implementations.resolver', 'ResolveTenant')
 
 # Find all the Application Routes
 routes = build_route_map(wd)

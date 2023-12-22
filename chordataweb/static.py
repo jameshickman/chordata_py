@@ -3,7 +3,7 @@ import mimetypes
 import time
 from email.utils import formatdate
 from email.utils import parsedate
-from chordate.output_stream import CHUNK_SIZE, file_buffer
+from chordataweb.output_stream import CHUNK_SIZE, file_buffer
 
 
 def static_file_exists(working_directory: str, pathname: str, tenant: str):

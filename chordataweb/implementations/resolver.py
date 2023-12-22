@@ -1,4 +1,4 @@
-from chordate.interfaces.resolver import BaseResolveTenant
+from chordataweb.interfaces.resolver import BaseResolveTenant
 """
 Basic implementation of multi-tenancy based on subdomain.
 """

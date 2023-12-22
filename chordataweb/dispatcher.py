@@ -1,9 +1,9 @@
 import os
 import json
-from chordate.posts import POSTdata
-from chordate.events import EventManager
-from chordate.server_env import ServerEnvironment
-from chordate.stderror import e_print
+from chordataweb.posts import POSTdata
+from chordataweb.events import EventManager
+from chordataweb.server_env import ServerEnvironment
+from chordataweb.stderror import e_print
 
 
 def build_route_map(working_directory: str):

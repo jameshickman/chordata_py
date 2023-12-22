@@ -11,7 +11,7 @@ exclude = [
 ]
 
 [project]
-name = "chordate"
+name = "chordataweb"
 version = "0.1.0"
 authors = [
   { name="James Hickman", email="james@rationalboxes.com" },
@@ -39,6 +39,6 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 [project.scripts]
-chordate_server = "chordate.bin.chordate_server:main"
-chordate_tool = "chordate.bin.chordate_tool:main"
-chordate_interval = "chordate.bin.chordate_interval:main"
+chordate_server = "chordataweb.bin.chordate_server:main"
+chordate_tool = "chordataweb.bin.chordate_tool:main"
+chordate_interval = "chordataweb.bin.chordate_interval:main"

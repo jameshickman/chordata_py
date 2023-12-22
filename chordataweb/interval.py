@@ -1,7 +1,7 @@
 import os
 import json
-from chordate.stderror import e_print
-from chordate.interfaces.database import BaseDatabase
+from chordataweb.stderror import e_print
+from chordataweb.interfaces.database import BaseDatabase
 
 
 def find_chron_configurations(working_directory: str) -> list:

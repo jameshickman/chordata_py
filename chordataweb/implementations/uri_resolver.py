@@ -1,4 +1,4 @@
-from chordate.interfaces.resolver import BaseResolveTenant
+from chordataweb.interfaces.resolver import BaseResolveTenant
 import sqlite3
 """
 Complex resolver that does not depend on the domain name.

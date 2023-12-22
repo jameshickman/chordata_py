@@ -5,7 +5,7 @@ import os
 import pickle
 import hashlib
 from xml.etree import ElementTree as ET
-from chordate.tagbuilder import TagBuilder
+from chordataweb.tagbuilder import TagBuilder
 
 
 class Render:
