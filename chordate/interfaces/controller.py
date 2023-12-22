@@ -13,7 +13,7 @@ all lower case.
 """
 
 
-class ControllerBase:
+class BaseController:
     def __init__(self, session: dict, configuration: dict, models: list):
         self.session = session
         self.configuration = configuration
@@ -42,6 +42,8 @@ class ControllerBase:
             return self.do_trace(data)
         elif verb == 'patch':
             return self.do_trace(data)
+        elif verb == 'job':
+            return self.do_recurring_job(data)
         else:
             return self._default(data)
         pass
@@ -71,6 +73,9 @@ class ControllerBase:
         return self._default(data)
 
     def do_patch(self, data: dict):
+        return self._default(data)
+
+    def do_recurring_job(self, data: dict):
         return self._default(data)
 
     def _default(self, data: dict):
