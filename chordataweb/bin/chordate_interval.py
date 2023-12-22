@@ -13,11 +13,12 @@ from chordataweb.interval import find_chron_configurations, ChronParams
 from chordataweb.tenants import get_tenants
 from chordataweb.injector import PackageMapper
 from chordataweb.stderror import e_print
+from chordataweb.interfaces.database import BaseDatabase
 
 
 class RunHandler(threading.Thread):
     def __init__(self,
-                 Database,
+                 Database: BaseDatabase,
                  app_dir: str,
                  package: str,
                  function: str,
