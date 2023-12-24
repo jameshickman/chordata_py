@@ -55,15 +55,20 @@ def html2code(html_file: str, start_node: str = None):
     if not os.path.exists(html_file):
         print(ERR_MISSING_FILE)
     from chordataweb.bin.html2nodes.converter import html_to_tag_builder
-    html = ""
+    from chordataweb.bin.html2nodes.metadata import MetadataProcessor
     with open(html_file, "r") as f:
         html = f.read()
-    code = html_to_tag_builder(html, start_node)
-    if code is False:
-        print(ERR_INVALID_SEARCH)
+    processor = MetadataProcessor(html)
+    if start_node is None and processor.find_config_block():
+        print(MSG_PROCESSING_DIRECTIVES)
+        processor.process_config_block()
     else:
-        print(code)
-    return
+        code = html_to_tag_builder(html, start_node)
+        if code is False:
+            print(ERR_INVALID_SEARCH)
+        else:
+            print(code)
+        return
 
 
 BOILERPLATE_ROUTES = """{
@@ -109,10 +114,14 @@ HELP = """
 Available operations:
     init - create default Chordate directory structure for Apps and default static files.
     create <app_name> - Create a new Chordate App structure in the local Apps Directory.
+                        If the HTML file contains a metadata object encoded as a JSON object,
+                        it will write a Python source file with functions as defined in the metadata object.
     html2code <html_file> <base_node: optional> - Convert an HTML file to equivalent Python code using TagBuilder
                                                   Code is written to stdout, so pipe into a file. The optional
                                                   third parameter can be an Xpath to the tag to start conversion at.
 """
+
+MSG_PROCESSING_DIRECTIVES = "Directives block found in template. Generating source file..."
 
 ERR_MISSING_APP_NAME = "You need to pass a name for your new Chordata App."
 
