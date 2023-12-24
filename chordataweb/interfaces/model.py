@@ -12,7 +12,7 @@ Extend with application specific operation methods.
 from chordataweb.interfaces.database import BaseDatabase
 
 
-class ModelBase:
+class BaseModel:
     def __init__(self, database: BaseDatabase = None, configuration: dict = None):
         if database is None and configuration is None:
             return
