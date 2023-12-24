@@ -113,9 +113,18 @@ def index(e: ServerEnvironment, s: dict):
 HELP = """
 Available operations:
     init - create default Chordate directory structure for Apps and default static files.
+    
     create <app_name> - Create a new Chordate App structure in the local Apps Directory.
                         If the HTML file contains a metadata object encoded as a JSON object,
                         it will write a Python source file with functions as defined in the metadata object.
+                        Metadata blocks is in the form of:
+                        <!-- {
+                            "target": "python_file_to_write_to",
+                            "widgets": {
+                                "function_name": "Xpath/to/select/tag"
+                            }
+                        } -->
+                        
     html2code <html_file> <base_node: optional> - Convert an HTML file to equivalent Python code using TagBuilder
                                                   Code is written to stdout, so pipe into a file. The optional
                                                   third parameter can be an Xpath to the tag to start conversion at.
