@@ -93,7 +93,9 @@ class Render:
             }
         :return: Fully rendered markup
         """
-        cache_file = str(hashlib.md5(str(pickle.dumps(self.m.get('etree'))).encode('utf-8')).hexdigest()) + ".tmpl"
+        cache_file = self.m.get('cache_file')
+        if cache_file is None:
+            cache_file = str(hashlib.md5(str(pickle.dumps(self.m.get('etree'))).encode('utf-8')).hexdigest()) + ".tmpl"
         cache_filename = os.path.join(self.cache, cache_file)
         if not os.path.exists(cache_filename):
             self.build_etree_template(cache_filename)
