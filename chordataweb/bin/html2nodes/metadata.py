@@ -54,7 +54,7 @@ class MetadataProcessor:
             search_path = self.config_block['widgets'][fctn_name]
             tag_text = html_to_tag_builder(self.html_text, search_path)
             if tag_text is not False:
-                source += "def " + str(fctn_name) + "(t: Translate) -> TagBuilder:\n"
+                source += "def " + str(fctn_name) + "(t: Translate, includes: dict = None) -> TagBuilder:\n"
                 source += "\t" + "return " + tag_text
                 source += "\n\n"
         with open(self.config_block['target'] + ".py", 'w') as f:
