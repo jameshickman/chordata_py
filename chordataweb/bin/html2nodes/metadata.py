@@ -1,5 +1,6 @@
 import json
 from chordataweb.bin.html2nodes.converter import html_to_tag_builder
+import time
 
 """
 Support for metadata directives in the HTML files.
@@ -14,8 +15,11 @@ The directive is an HTML comment containing a JSON data packet of the following 
 """
 
 
-SOURCE = """from chordataweb.tagbuilder import TagBuilder
+SOURCE = f"""from chordataweb.tagbuilder import TagBuilder
 from chordataweb.util.translation import Translate
+
+
+GENERATION_TIMESTAMP = {int(time.time())}
 
 
 """
