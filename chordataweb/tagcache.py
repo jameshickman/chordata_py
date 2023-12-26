@@ -3,7 +3,9 @@ Wrapper around the TagBuilder system for efficient cached compiled templates.
 
 Generation timestamp embedded in the cache filename.
 
-The call-back for build() is the auto-generated function as produced by the automation tool.
+The call-back for build() should be a handwritten builder that builds the top-level
+HTML constructs. Needs to accept the Translation object, dictionary of included
+sections, stylesheets and scripts.
 
 Return the metadata 'etree' the result of calling build() and 'cache_file' the result
 of calling get_template_name()
@@ -96,6 +98,8 @@ class TagCache:
                     break
         if dirty or not self.template_exists:
             includes = {}
+            stylesheets = []
+            scripts = []
             if local_includes is not None:
                 includes = local_includes
             for event in source_events:
@@ -107,5 +111,9 @@ class TagCache:
                 returned_interfaces = sorted(returned_interfaces, key=lambda d: d['weight'])
                 for interface in returned_interfaces:
                     includes[event].append(interface.get('interface'))
-            return root_builder(t, includes)
+                    if 'stylesheets' in interface:
+                        stylesheets.extend(interface.get('stylesheets'))
+                    if 'scripts' in interface:
+                        scripts.extend(interface.get('scripts'))
+            return root_builder(t, includes, set(stylesheets), set(scripts))
         return None
