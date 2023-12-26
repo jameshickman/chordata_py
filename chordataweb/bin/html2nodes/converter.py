@@ -23,7 +23,7 @@ def html_to_tag_builder(html_string: str, starting_node: str = None) -> (str, bo
                 code_children = []
                 for child in node:
                     code_children.append(parse(child))
-                code += ".add_child([\n" + ",\n ".join(code_children) + "])"
+                code += ".add_child(deepflatten([\n" + ",\n ".join(code_children) + "], depth=1))"
         return code
 
     root = ET.fromstring(html_string)
