@@ -39,7 +39,6 @@ class TagCache:
         self.template_exists = False
         """
         Check if an existing cached template exists and deletes outdated templates.
-        :return:
         """
         find_path = os.path.join(
             self.configuration.get('compile_cache'), self.signature + "-*-" + self.language_code + ".vtpl"
