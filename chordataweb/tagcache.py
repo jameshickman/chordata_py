@@ -63,7 +63,7 @@ class TagCache:
                     os.remove(to_delete)
             self.existing_template = self.signature + "-" + str(newest_timestamp) + "-" + self.language_code + ".vtpl"
             self.template_timestamp = newest_timestamp
-            self.get_template_name()
+        self.get_template_name()
 
     def get_timestamp(self) -> int:
         return self.template_timestamp
