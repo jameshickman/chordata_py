@@ -63,19 +63,17 @@ class TagCache:
                     os.remove(to_delete)
             self.existing_template = self.signature + "-" + str(newest_timestamp) + "-" + self.language_code + ".vtpl"
             self.template_timestamp = newest_timestamp
-        self.get_template_name()
+            self.template_exists = True
+        else:
+            self.template_timestamp = int(time.time())
+            self.existing_template = self.signature + "-" + str(self.template_timestamp) + \
+                                     "-" + self.language_code + ".vtpl"
 
     def get_timestamp(self) -> int:
         return self.template_timestamp
 
     def get_template_name(self) -> str:
-        if self.existing_template is not None:
-            return self.existing_template
-        else:
-            self.template_timestamp = int(time.time())
-            self.existing_template = self.signature + "-" + str(
-                self.template_timestamp) + "-" + self.language_code + ".vtpl"
-            return self.existing_template
+        return self.existing_template
 
     def build(self,
               event_manager: EventManager,
