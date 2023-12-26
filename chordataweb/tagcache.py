@@ -78,7 +78,8 @@ class TagCache:
               event_manager: EventManager,
               source_events: list,
               root_timestamp: int,
-              root_builder: Callable
+              root_builder: Callable,
+              local_includes: list = None
               ) -> (None, TagBuilder):
         t = Translate(self.language_code, self.configuration.get('language_db'))
         dirty = False
@@ -95,6 +96,8 @@ class TagCache:
                     break
         if dirty or not self.template_exists:
             includes = {}
+            if local_includes is not None:
+                includes = local_includes
             for event in source_events:
                 includes[event] = []
                 rvs = event_manager.send(event, {'app': self.app_name, 'translation': t})
