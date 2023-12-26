@@ -7,10 +7,12 @@ from chordataweb.stderror import e_print
 class EventParams:
     def __init__(self,
                  database: BaseDatabase,
+                 configuration: dict,
                  frm: str,
                  em: 'EventManager',
                  payload):
         self.database = database
+        self.configuration = configuration
         self.frm = frm
         self.event_manager = em
         self.payload = payload
@@ -18,6 +20,9 @@ class EventParams:
 
     def get_database(self) -> BaseDatabase:
         return self.database
+
+    def get_configuration(self) -> dict:
+        return self.configuration
 
     def get_from(self) -> str:
         return self.frm
@@ -46,9 +51,10 @@ def find_watchers(working_directory: str):
 
 
 class EventManager:
-    def __init__(self, watchers: dict, app: str, database: BaseDatabase):
+    def __init__(self, watchers: dict, app: str, configuration: dict, database: BaseDatabase):
         self.map = watchers
         self.app = app
+        self.configuration = configuration
         self.database = database
         pass
 
@@ -62,6 +68,7 @@ class EventManager:
                 rv[dest] = getattr(pkg, function)(
                     EventParams(
                         self.database,
+                        self.configuration,
                         self.app,
                         self,
                         payload
