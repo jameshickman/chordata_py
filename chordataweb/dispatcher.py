@@ -111,7 +111,7 @@ class Dispatcher:
             self.injector,
             self._extract_route_vars(self.request_path, self.key),
             self._query_vars(),
-            EventManager(self.watcher_map, self.application, database),
+            EventManager(self.watcher_map, self.application, self.configuration, database),
             session_id
         )
         params.set_verb(self.verb)
