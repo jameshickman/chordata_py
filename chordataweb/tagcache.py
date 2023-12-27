@@ -113,12 +113,13 @@ class TagCache:
         return None
 
 
-def check_for_dirty_components(event_manager: EventManager, event_name: str, timestamp: int) -> bool:
-    rvs = event_manager.send(event_name, timestamp)
-    for hdl in rvs.keys():
-        if rvs[hdl]:
-            return True
-    return False
+def check_for_dirty_components(event_manager: EventManager, event_names: list[str], timestamp: int) -> bool:
+    for event_name in event_names:
+        rvs = event_manager.send(event_name, timestamp)
+        for hdl in rvs.keys():
+            if rvs[hdl]:
+                return True
+        return False
 
 
 def make_component_requests(
