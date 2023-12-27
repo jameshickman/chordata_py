@@ -119,3 +119,27 @@ def check_for_dirty_components(event_manager: EventManager, event_name: str, tim
         if rvs[hdl]:
             return True
     return False
+
+
+def make_component_requests(
+        event_manager: EventManager,
+        event_names: list[str],
+        app_name: str,
+        translation: Translate) -> tuple:
+    includes = {}
+    stylesheets = []
+    scripts = []
+    for event in event_names:
+        rvs = event_manager.send(event, {'app': app_name, 'translation': translation})
+        returned_interfaces = []
+        for hdl in rvs.keys():
+            returned_interfaces.append(rvs[hdl])
+        returned_interfaces = sorted(returned_interfaces, key=lambda d: d['weight'])
+        interfaces = []
+        for interface in returned_interfaces:
+            interfaces.append(interface.get('interface'))
+            stylesheets.extend(interface.get('stylesheets', []))
+            scripts.extend(interface.get('scripts', []))
+        includes[event] = interfaces
+    return includes, set(stylesheets), set(scripts)
+
