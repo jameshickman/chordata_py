@@ -57,16 +57,13 @@ class TagCache:
                 if timestamp != newest_timestamp:
                     to_delete = os.path.join(
                         self.configuration.get('compile_cache'),
-                        self.signature + "-" + str(timestamp) + ".vtpl"
+                        self.signature + "-" + str(timestamp) + "-" + self.language_code + ".vtpl"
                     )
-                    os.remove(to_delete)
+                    if os.path.exists(to_delete):
+                        os.remove(to_delete)
             self.existing_template = self.signature + "-" + str(newest_timestamp) + "-" + self.language_code + ".vtpl"
             self.template_timestamp = newest_timestamp
             self.template_exists = True
-        else:
-            self.template_timestamp = int(time.time())
-            self.existing_template = self.signature + "-" + str(self.template_timestamp) + \
-                                     "-" + self.language_code + ".vtpl"
 
     def get_timestamp(self) -> int:
         return self.template_timestamp
@@ -85,11 +82,8 @@ class TagCache:
         dirty = False
         if self.template_exists and root_timestamp > self.template_timestamp:
             dirty = True
-        else:
-            for event in source_events:
-                if check_for_dirty_components(event_manager, event, self.template_timestamp):
-                    dirty = True
-                    break
+        if check_for_dirty_components(event_manager, source_events, self.template_timestamp):
+            dirty = True
         if dirty or not self.template_exists:
             includes = {}
             stylesheets = []
@@ -109,7 +103,10 @@ class TagCache:
                         stylesheets.extend(interface.get('stylesheets'))
                     if 'scripts' in interface:
                         scripts.extend(interface.get('scripts'))
-            return root_builder(t, includes, set(stylesheets), set(scripts))
+            self.template_timestamp = int(time.time())
+            self.existing_template = self.signature + "-" + str(self.template_timestamp) + \
+                                     "-" + self.language_code + ".vtpl"
+            return root_builder(t, includes, list(set(stylesheets)), list(set(scripts)))
         return None
 
 
