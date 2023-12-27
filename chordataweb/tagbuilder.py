@@ -36,13 +36,21 @@ class TagBuilder:
         return self
 
     def add_child(self, child: ('TagBuilder', list)):
+        def flatten(inp: list) -> list:
+            o = []
+            for item in inp:
+                if isinstance(item, list):
+                    o.extend(flatten(item))
+                else:
+                    o.append(item)
+            return o
         if 'children' not in self.d:
             self.d['children'] = []
         if isinstance(child, TagBuilder):
             self.d['children'].append(child)
         else:
             if len(child) > 0:
-                self.d['children'].extend(child)
+                self.d['children'].extend(flatten(child))
         return self
 
     def get(self) -> dict:
