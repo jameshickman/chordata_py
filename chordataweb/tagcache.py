@@ -32,7 +32,7 @@ class TagCache:
         self.configuration = configuration
         self.app_name = app_name
         self.interface_name = interface_name
-        self.language_code = language_code
+        self.language_code = language_code.split(",")[0].replace("-", "_").lower()
         self.signature = str(hashlib.md5(str(app_name + interface_name).encode("utf-8")).hexdigest())
         self.existing_template = None
         self.template_timestamp = 0
@@ -142,5 +142,5 @@ def make_component_requests(
             stylesheets.extend(interface.get('stylesheets', []))
             scripts.extend(interface.get('scripts', []))
         includes[event] = interfaces
-    return includes, set(stylesheets), set(scripts)
+    return includes, list(set(stylesheets)), list(set(scripts))
 
