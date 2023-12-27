@@ -15,8 +15,7 @@ The directive is an HTML comment containing a JSON data packet of the following 
 """
 
 
-SOURCE = f"""from iteration_utilities import deepflatten
-from chordataweb.tagbuilder import TagBuilder
+SOURCE = f"""from chordataweb.tagbuilder import TagBuilder
 from chordataweb.util.translation import Translate
 
 
