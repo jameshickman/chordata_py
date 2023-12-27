@@ -87,12 +87,8 @@ class TagCache:
             dirty = True
         else:
             for event in source_events:
-                rvs = event_manager.send(event, self.template_timestamp)
-                for hdl in rvs:
-                    if rvs[hdl] is not False:
-                        dirty = True
-                        break
-                if dirty is True:
+                if check_for_dirty_components(event_manager, event, self.template_timestamp):
+                    dirty = True
                     break
         if dirty or not self.template_exists:
             includes = {}
@@ -115,3 +111,11 @@ class TagCache:
                         scripts.extend(interface.get('scripts'))
             return root_builder(t, includes, set(stylesheets), set(scripts))
         return None
+
+
+def check_for_dirty_components(event_manager: EventManager, event_name: str, timestamp: int) -> bool:
+    rvs = event_manager.send(event_name, timestamp)
+    for hdl in rvs.keys():
+        if rvs[hdl]:
+            return True
+    return False
