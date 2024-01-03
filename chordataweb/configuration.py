@@ -13,7 +13,7 @@ def load_json(pathname: str, defaults: dict = {}):
     return defaults
 
 
-def env_loader(defs: list):
+def env_loader(defs: list) -> dict:
     defs.extend(dynamic_key_loader())
     cfg = {}
     for d in defs:
