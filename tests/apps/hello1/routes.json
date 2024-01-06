@@ -1,0 +1,20 @@
+{
+  "index": {
+    "package": "main",
+    "function": "index",
+    "permissions": {
+      "get": [],
+      "post": [],
+      "delete": [],
+      "default": []
+    }
+  },
+  "variables/{var1}/{var2}": {
+    "package": "main",
+    "function": "route_vars_test"
+  },
+  "variables/query": {
+    "package": "main",
+    "function": "query_vars_test"
+  }
+}

@@ -1,3 +1,4 @@
+import sys
 import unittest
 import os
 
@@ -12,8 +13,7 @@ class TestDispatcher(unittest.TestCase):
         Set up dummy environment for testing against.
         :return:
         """
-        os.environ['REQUEST_METHOD'] = "get"
-        self.wd = os.path.join(os.getcwd(), "cases")
+        self.wd = os.path.join(os.getcwd())
         pass
 
     def test_route_loader(self):
@@ -55,4 +55,38 @@ class TestDispatcher(unittest.TestCase):
         assert d.permissions_check([]) is False
         assert d.permissions_check(["user"]) is False
         assert d.permissions_check(["user", "administrator"]) is True
+        pass
+
+    def test_route_variables(self):
+        from chordataweb.dispatcher import build_route_map, Dispatcher
+        routes = build_route_map(self.wd)
+        environ = {
+            'REQUEST_METHOD': 'get',
+            'HTTP_HOST': 'demo.test.com',
+            'PATH_INFO': '/hello1/variables/123/test_string'
+        }
+        d = Dispatcher(environ, {}, routes, "demo",
+                       "/hello1/variables/123/test_string", self.wd, None, {})
+        data, meta = d.execute(None, {}, {}, '')
+        assert data["var1"] == '123'
+        assert data['var2'] == 'test_string'
+        assert meta['serviceOf'] == 'json'
+        pass
+
+    def test_query_vars(self):
+        from chordataweb.dispatcher import build_route_map, Dispatcher
+        routes = build_route_map(self.wd)
+        environ = {
+            'REQUEST_METHOD': 'get',
+            'HTTP_HOST': 'demo.test.com',
+            'PATH_INFO': '/hello1/variables/query',
+            'QUERY_STRING': 'var1=123&var2=test_string'
+        }
+        url = "/hello1/variables/query"
+        d = Dispatcher(environ, {}, routes, "demo",
+                       url, self.wd, None, {})
+        data, meta = d.execute(None, {}, {}, '')
+        assert data["var1"] == '123'
+        assert data['var2'] == 'test_string'
+        assert meta['serviceOf'] == 'json'
         pass
