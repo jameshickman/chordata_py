@@ -3,6 +3,8 @@ import json
 from chordataweb.posts import POSTdata
 from chordataweb.events import EventManager
 from chordataweb.server_env import ServerEnvironment
+from chordataweb.injector import PackageMapper
+from chordataweb.interfaces.database import BaseDatabase
 from chordataweb.stderror import e_print
 
 
@@ -40,8 +42,8 @@ class Dispatcher:
             tenant_name: str,
             request_path: str,
             working_directory: str,
-            injector,
-            watcher_map
+            injector: PackageMapper,
+            watcher_map: dict
     ):
         self.map = route_map
         self.environ = wsgi_environ
@@ -66,7 +68,7 @@ class Dispatcher:
             raise RouteNotFound(self.request_path)
         pass
 
-    def permissions_check(self, user_roles: list = []):
+    def permissions_check(self, user_roles: list) -> bool:
         if ('permissions' not in self.map[self.application][self.key] or
                 len(self.map[self.application][self.key]['permissions']) == 0):
             return True
@@ -87,14 +89,14 @@ class Dispatcher:
                 return False
         return True
 
-    def get_application(self):
+    def get_application(self) -> str:
         return self.application
 
     def execute(
             self,
-            database,
-            cookies: dict = {},
-            session: dict = {},
+            database: BaseDatabase,
+            cookies: dict,
+            session: dict,
             session_id: str = ''
     ):
         self._setup_check(database)
@@ -124,14 +126,14 @@ class Dispatcher:
         package = __import__(package_name, fromlist=[function_name])
         return getattr(package, function_name)(params, session)
 
-    def get_full_url(self):
+    def get_full_url(self) -> str:
         qs = self.environ.get('QUERY_STRING', '')
         url = "https://" + str(self.environ['HTTP_HOST']) + str(self.environ['PATH_INFO'])
         if qs != '':
             url = url + "?" + qs
         return url
 
-    def _setup_check(self, database):
+    def _setup_check(self, database: BaseDatabase):
         setup_package = "apps." + str(self.application) + ".db_setup"
         try:
             setup = __import__(setup_package, fromlist=['schema', 'setup'])
@@ -147,7 +149,7 @@ class Dispatcher:
             pass
         return
 
-    def _query_vars(self):
+    def _query_vars(self) -> dict:
         q_vars = {}
         qs = self.environ.get('QUERY_STRING', '')
         var_pairs = qs.split('&')
@@ -159,7 +161,7 @@ class Dispatcher:
         return q_vars
 
     @staticmethod
-    def _match_check(url: str, key: str):
+    def _match_check(url: str, key: str) -> bool:
         segments_url = url.split('/')
         segments_key = key.split('/')
         if len(segments_url) != len(segments_key):
@@ -180,7 +182,7 @@ class Dispatcher:
         return matched
 
     @staticmethod
-    def _extract_route_vars(url: str, signature: str):
+    def _extract_route_vars(url: str, signature: str) -> dict:
         values = {}
         segments_url = url.split('/')
         segments_sig = signature.split('/')
