@@ -8,10 +8,6 @@ Test the handler dispatcher class
 
 class TestDispatcher(unittest.TestCase):
     def setUp(self):
-        """
-        Set up dummy environment for testing against.
-        :return:
-        """
         self.wd = os.path.join(os.getcwd())
         pass
 
