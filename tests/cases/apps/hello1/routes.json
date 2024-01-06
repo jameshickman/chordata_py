@@ -1,0 +1,12 @@
+{
+  "index": {
+    "package": "main",
+    "function": "index",
+    "permissions": {
+      "get": [],
+      "post": [],
+      "delete": [],
+      "default": []
+    }
+  }
+}
