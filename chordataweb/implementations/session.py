@@ -4,17 +4,17 @@ import uuid
 import time
 import glob
 
+from chordataweb.interfaces.session import BaseSessionManager
+
 """
 Tenant data is a dict where the key is the tenant name and the value is a list of groups
 the user has membership in for that tenant.
+
+Default file-based storage using Pickle
 """
 
 
-class SessionManager:
-    def __init__(self, cfg):
-        self.config = cfg
-        self._purge()
-
+class SessionManager(BaseSessionManager):
     def start(self):
         session_id = uuid.uuid4()
         self.session_write(str(session_id), {})
