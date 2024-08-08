@@ -5,12 +5,10 @@
 import os
 import sys
 
-
 wd = os.getcwd()
 sys.path.append(wd)
 
-
-from chordataweb.configuration import env_loader
+from chordataweb.configuration import load_json
 from chordataweb.injector import PackageMapper
 from chordataweb.render import Render
 from chordataweb.static import static_file_exists, serve_static
@@ -20,31 +18,18 @@ from chordataweb.cookies import get_cookies, build_cookie_header
 from chordataweb.stderror import e_print
 from chordataweb.output_stream import CHUNK_SIZE, file_buffer
 
-SESSION_COOKIE = "CHORDATASESSION"
+SESSION_COOKIE = "CHORDATA_SESSION"
 
-
-configuration_keys = [
-    'default_route',
-    'session_path',
-    'session_timeout',
-    'database_user',
-    'database_password',
-    'database_host',
-    'database_port',
-    'email_host',
-    'email_port',
-    'email_user',
-    'email_password',
-    'email_from',
-    'email_secured',
-    'user_landing',
-    'login',
-    'forward_to_var',
-    'compile_cache',
-    'tenant_database',
-    'language_db'
-]
-configuration = env_loader(configuration_keys)
+configuration = load_json(
+    os.getenv('CHORDATA_CONFIG_FILE', False),
+    {
+        'database_user': '$CHORDATA_DB_USER',
+        'database_password': '$CHORDATA_DB_PASSWORD',
+        'database_host': '$CHORDATA_DB_HOST',
+        'database_port': '$CHORDATA_DB_PORT',
+        'session_path': '$CHORDATA_SESSION_PATH',
+    }
+)
 
 injection_manager = PackageMapper()
 
