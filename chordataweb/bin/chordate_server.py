@@ -119,6 +119,8 @@ def handler(environ, start_response):
 
     # Run the action
     dbc = Database(tenant, configuration)
+    if not dbc.db_exists():
+        dbc.init_database()
     try:
         out, meta = dsp.execute(dbc, cookies, session_data, session_id)
     except Exception as e:
