@@ -12,14 +12,14 @@ class TestConfiguration(unittest.TestCase):
     def test_environment_variable(self):
         os.environ['CHOR_test'] = "test value"
         os.environ['CHOR_test_2'] = "test value2"
-        result = env_loader(['test', 'test_2'])
+        result = env_loader(
+            {
+                "test": "$CHOR_test",
+                "test_2": "$CHOR_test_2",
+                "test_3": "Static value"
+            }
+        )
         assert result['test'] == 'test value'
         assert result['test_2'] == 'test value2'
+        assert result['test_3'] == 'Static value'
 
-    def test_custom_keys_loader(self):
-        os.environ['CHOR_test'] = "test value"
-        os.environ['CHOR_test_2'] = "test value2"
-        os.environ['CHOR_custom_keys'] = "test:test_2"
-        result = env_loader([])
-        assert result['test'] == 'test value'
-        assert result['test_2'] == 'test value2'
