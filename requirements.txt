@@ -12,3 +12,4 @@ Jinja2~=3.1.4
 ldap3~=2.9.1
 iteration-utilities~=0.12.1
 nose2~=0.15.0
+# legacy-cgi~=2.6.1
