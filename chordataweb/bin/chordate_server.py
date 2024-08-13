@@ -33,7 +33,7 @@ configuration = load_json(
 
 injection_manager = PackageMapper()
 
-class_map = os.getenv('CHOR_INJECTION_MAP', False)
+class_map = os.getenv('CHORDATA_INJECTION_MAP', False)
 if class_map is not False:
     injection_manager.load_json(class_map)
 

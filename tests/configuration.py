@@ -13,7 +13,7 @@ class TestConfiguration(unittest.TestCase):
         os.environ['CHOR_test'] = "test value"
         os.environ['CHOR_test_2'] = "test value2"
         result = env_loader(
-            {
+            defaults={
                 "test": "$CHOR_test",
                 "test_2": "$CHOR_test_2",
                 "test_3": "Static value"
