@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from chordataweb.configuration import env_loader, dynamic_key_loader
+from chordataweb.configuration import load_json
 
 """
 Automated tests for the configuration module
@@ -12,7 +12,7 @@ class TestConfiguration(unittest.TestCase):
     def test_environment_variable(self):
         os.environ['CHOR_test'] = "test value"
         os.environ['CHOR_test_2'] = "test value2"
-        result = env_loader(
+        result = load_json(
             defaults={
                 "test": "$CHOR_test",
                 "test_2": "$CHOR_test_2",
