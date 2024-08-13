@@ -50,5 +50,5 @@ class Database(BaseDatabase):
         return
 
     @staticmethod
-    def get_orm_type(self):
+    def get_orm_type():
         return "SQLAlchamy"
