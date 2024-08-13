@@ -28,6 +28,7 @@ configuration = load_json(
         'database_host': '$CHORDATA_DB_HOST',
         'database_port': '$CHORDATA_DB_PORT',
         'session_path': '$CHORDATA_SESSION_PATH',
+        'session_timeout': '$CHORDATA_SESSION_TIMEOUT',
     }
 )
 
