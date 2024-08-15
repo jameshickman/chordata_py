@@ -21,7 +21,7 @@ from chordataweb.output_stream import CHUNK_SIZE, file_buffer
 SESSION_COOKIE = "CHORDATA_SESSION"
 
 configuration = load_json(
-    os.getenv('CHORDATA_CONFIG_FILE', False),
+    os.getenv('CHORDATA_CONFIG_FILE'),
     {
         'database_user': '$CHORDATA_DB_USER',
         'database_password': '$CHORDATA_DB_PASSWORD',
