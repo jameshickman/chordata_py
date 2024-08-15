@@ -46,7 +46,10 @@ class Database(BaseDatabase):
 
     def create_schema(self, schema):
         from sqlalchemy.schema import CreateSchema
-        self.engine.execute(CreateSchema(schema))
+        conn = self.get_connection()
+        conn.execute(CreateSchema(schema))
+        conn.commit()
+        conn.close()
         return
 
     @staticmethod
