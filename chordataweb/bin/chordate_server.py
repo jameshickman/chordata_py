@@ -121,7 +121,9 @@ def handler(environ, start_response):
 
     # Run the action
     dbc = Database(tenant, configuration)
-    if not dbc.db_exists():
+    if not dbc.db_exists() and \
+            configuration.get('auto_database_creation', False) is not False \
+            and rs.domain_verifier():
         dbc.init_database()
     try:
         out, meta = dsp.execute(dbc, cookies, session_data, session_id)

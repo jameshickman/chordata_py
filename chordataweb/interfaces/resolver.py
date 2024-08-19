@@ -31,3 +31,17 @@ class BaseResolveTenant:
         else:
             return self.u
 
+    def domain_verifier(self) -> bool:
+        """
+        Conduct a DNS lookup for the request hostname.
+        Needed to verify that the subdomain specifying the Tenant
+        actually exists to prevent host-file based DOS attack
+        creating empty databases.
+        :return:
+        """
+        import socket
+        host_name = self.e.get('HTTP_X_FORWARDED_HOST')
+        returned_ips = list(map(lambda x: x[4][0], socket.getaddrinfo('{}.'.format(host_name),443,type=socket.SOCK_STREAM)))
+        if len(returned_ips) > 0:
+            return True
+        return False
